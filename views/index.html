@@ -15,8 +15,14 @@
     <input type="submit" value="Create To Do">
   </form>
 
+  <select ng-model="dropOption" ng-change="optionToSort()">
+    <option ng-repeat="x in dropOptions">{{x}}</option>
+  </select>
+
+  <div>here{{dropSort}}</div>
+
   <table>
-    <tr todo-item ng-repeat="item in items | completeFilter: activateCompleteFilter" item="item" delete-item="deleteItem()">
+    <tr todo-item ng-repeat="item in items | completeFilter: activateCompleteFilter | orderBy: dropSort" item="item" delete-item="deleteItem()">
     </tr>
   </table>
 

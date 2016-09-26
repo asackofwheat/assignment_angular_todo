@@ -4,8 +4,34 @@ toDo.controller('ToDoCtrl', ['$scope', 'todoService', function($scope, todoServi
 
   $scope.items = todoService.getItems();
   $scope.item = {};
+  $scope.dropOptions = ["Completed on Top",
+                        "Completed on Bottom",
+                        "Due Date Descending",
+                        "Due Date Ascending",
+                        "None"];
 
   $scope.activateCompleteFilter = false;
+  $scope.dropSort;
+
+  $scope.optionToSort = function() {
+    switch($scope.dropOption) {
+      case 'Completed on Top':
+        $scope.dropSort = "completed"
+        break;
+      case 'Completed on Bottom':
+        $scope.dropSort = "-completed"
+        break;
+      case 'Due Date Descending':
+        $scope.dropSort = "-dueDate"
+        break;
+      case 'Due Date Ascending':
+        $scope.dropSort = "dueDate"
+        break;
+      case 'None':
+        $scope.dropSort = ""
+        break;
+    }
+  }
 
   $scope.addItem = function() {
     var item = {
