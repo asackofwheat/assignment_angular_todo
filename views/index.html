@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html ng-app="toDo" ng-controller="ToDoCtrl">
+<head>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular.min.js"></script>
+  <title></title>
+</head>
+<body>
+
+  <form ng-submit="addItem(item)">
+    <label>Task</label>
+    <input type="text" ng-model="item.text">
+    <label>Due Date</label>
+    <input type="date" ng-model="item.dueDate">
+    <input type="submit" value="Create To Do">
+  </form>
+
+  <table>
+    <tr todo-item ng-repeat="item in items | completeFilter: activateCompleteFilter" item="item" delete-item="deleteItem()">
+    </tr>
+  </table>
+
+  <button ng-click="activateCompleteFilter=!activateCompleteFilter">{{showCompleteButton(activateCompleteFilter)}}</button>
+  <input type="button" value="clear completed" ng-click="clearCompleted()">
+
+  <script src="/app/controllers/app.js"></script>
+  <script src="/app/filters/complete_filter.js"></script>
+  <script src="/app/directives/todo_item.js"></script>
+  <script src="/app/services/todo_service.js"></script>
+</body>
+</html>
